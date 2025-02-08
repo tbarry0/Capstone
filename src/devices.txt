@@ -1,0 +1,22 @@
+thermostat, Hallway
+security system, hallway
+fan, living room
+fan, bedroom
+lights, kitchen
+lights, living room
+home assistant, living room
+cameras, front door
+fireplace, living room
+fridge, kitchen
+oven, kitchen
+coffee maker, kitchen
+roomba, living room
+television, living room
+television, bedroom
+speakers, living room
+locks, front door
+air conditioning, bedroom
+dishwasher, kitchen
+sprinkler system, yard
+curtains, living room
+
