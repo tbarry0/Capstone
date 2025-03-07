@@ -19,4 +19,9 @@ air conditioning, bedroom
 dishwasher, kitchen
 sprinkler system, yard
 curtains, living room
-
+curtains, bedroom
+humidifier, living room
+humidifier, bedroom
+sound system, living room
+sound system, outside
+sprinkler system, outside
