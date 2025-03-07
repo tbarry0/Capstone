@@ -5,6 +5,17 @@ public class smartHomeSystem {
     private thermostat thermostat;
     private schedule schedule;
 
+    public static void recusiveDeviceControl(List<homeSystem> devices, boolean turnOn) {
+        if(devices.isEmpty()){
+            System.out.println("No devices");
+        }else{
+            String currentDevice = String.valueOf(devices.get(0));
+            controlDevice(currentDevice, turnOn);
+
+            recursiveDeviceControl(devices.subList(1, devices.size()), turnOn);
+        }
+    }
+
 
     public schedule getScedule(){
         return schedule;
@@ -27,18 +38,11 @@ public class smartHomeSystem {
         return null;
     }
 
-    public void recursiveDeviceControl(List<String> deviceNames, boolean turnOn){
-        if(deviceNames.isEmpty()){
-            return;
-        }else{
-            String currentDevice = deviceNames.get(0);
-            controlDevice(currentDevice, turnOn);
+    public static void recursiveDeviceControl(List<homeSystem> deviceNames, boolean turnOn){
 
-            recursiveDeviceControl(deviceNames.subList(1, deviceNames.size()), turnOn);
-        }
     }
 
-    public void controlDevice(String deviceName, boolean turnOn){
+    public static void controlDevice(String deviceName, boolean turnOn){
         for(homeSystem homeSystem : homeSystems){
             if(homeSystem.getDevice().equalsIgnoreCase(deviceName)){
                 if(turnOn){

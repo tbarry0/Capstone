@@ -37,6 +37,7 @@ public class userInterface {
             for(homeSystem device : devices){
                 device.displayInfo();
             }
+
             System.out.println("Enter device name to set a timer or turn off a timer: ");
             while (true) {
                 String deviceName = scnr.nextLine();
@@ -45,6 +46,8 @@ public class userInterface {
                 System.out.println("Trun on or off?");
                 boolean turnOn = scnr.nextBoolean();
                 homeSystem device = smartHomeSystem.getDeviceByName(deviceName);
+                System.out.println("Current devices and their status:");
+                smartHomeSystem.recusiveDeviceControl(devices, turnOn);
                 if(device != null){
                     smartHomeSystem.getSchedule.setTimer(delay, device, turnOn);
                     System.out.println(device + "scheduled to turn " + (turnOn ? "ON" : "OFF") + " in " + delay + " ms");
