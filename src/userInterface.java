@@ -15,6 +15,7 @@ public class userInterface {
         if (loadDevicesFromFile()) {
             displayAllDevices();
             //create a command loop
+            commandLoop();
         } else {
             System.out.println("No devices loaded exiting.");
         }
@@ -115,6 +116,46 @@ public class userInterface {
         schedule.setTimer(delay, device, turnOn);
 
         System.out.println("Device " + deviceName + " scheduled to turn " + (turnOn ? "ON" : "OFF") + " in " + delay + "ms");
+    }
+
+    private static void commandLoop(){
+        System.out.println("Smart Home System Command Interface");
+        System.out.println("Type 'list' for commands or 'exit' to quit: ");
+
+        boolean running = true;
+        while(running){
+            System.out.println("\nEnter Command: ");
+            String command = scanner.nextLine().trim().toLowerCase();
+
+            switch(command) {
+                case "list":
+                    displayAllDevices();
+                    break;
+                case "control":
+                    controlDevice();
+                    break;
+                case "schedule":
+                    scheduleDevice();
+                    break;
+                case "help":
+                    displayHelp();
+                case "exit":
+                    System.out.println("Goodbye, Exiting Smart Home System");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Unknown command. Type 'help' to access commands.");
+            }
+        }
+    }
+
+    private static void displayHelp(){
+        System.out.println("Commands:");
+        System.out.println("help: displays this message");
+        System.out.println("list: List all the devices");
+        System.out.println("control: Controls a device(turning it on or off");
+        System.out.println("schedule: Sets a schedule/timer to turn a device on or off");
+        System.out.println("exit: Quits the program");
     }
 }
 
