@@ -9,6 +9,7 @@ public class homeSystem {
         this.on = false; //default set to off
         this.location = location;
     }
+
     //get device name
     public String getDevice(){
         return device;
@@ -16,6 +17,10 @@ public class homeSystem {
 
     public String getLocation(){
         return location;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
     }
     //turn the device on
     public void turnOn(){
@@ -53,6 +58,11 @@ class thermostat extends homeSystem{
         this.temp = temp;
         System.out.println("Temperature is set: " + temp + "ºF");
     }
+    @Override
+    public void displayInfo(){
+        super.displayInfo();
+        System.out.println("Current temperature: " + getTemp() + "ºF");
+    }
 }
 
 class schedule{
@@ -74,7 +84,13 @@ class schedule{
             }
         }, delay);
     }
+
+    public void cancelTimer(){
+        timer.cancel();
+    }
 }
+
+
 
 class deviceLocationSorter implements Comparator<homeSystem> {
     @Override

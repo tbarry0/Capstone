@@ -1,18 +1,28 @@
 import java.util.*;
 public class smartHomeSystem {
     public static schedule getSchedule;
-    private static List<homeSystem> homeSystems;
+    private static List<homeSystem> homeSystems = new ArrayList<>();
     private thermostat thermostat;
     private schedule schedule;
+
+    public smartHomeSystem(){
+        schedule = new schedule();
+    }
 
     public static void recusiveDeviceControl(List<homeSystem> devices, boolean turnOn) {
         if(devices.isEmpty()){
             System.out.println("No devices");
+            return;
+        }
+        homeSystem currentDevice = devices.get(0);
+        if(turnOn){
+            currentDevice.turnOn();
         }else{
-            String currentDevice = String.valueOf(devices.get(0));
-            controlDevice(currentDevice, turnOn);
+            currentDevice.turnOff();
+        }
 
-            recursiveDeviceControl(devices.subList(1, devices.size()), turnOn);
+        if(devices.size() > 1){
+            recusiveDeviceControl(devices.subList(1, devices.size()), turnOn);
         }
     }
 
@@ -27,29 +37,54 @@ public class smartHomeSystem {
 
     public void addTheromostat(thermostat thermostat){
         this.thermostat = thermostat;
+        addDevice(thermostat);
     }
 
     public static homeSystem getDeviceByName(String deviceName){
-        for(homeSystem homeSystem: homeSystems){
-            if(homeSystem.getDevice().equalsIgnoreCase(deviceName)){
-                return homeSystem;
+        for(homeSystem device : homeSystems){
+            if(device.getDevice().equalsIgnoreCase(deviceName)){
+                return device;
             }
         }
         return null;
     }
 
-    public static void recursiveDeviceControl(List<homeSystem> deviceNames, boolean turnOn){
-
+    public static boolean controlDevice(String deviceName, boolean turnOn){
+        boolean deviceFound = false;
+        for(homeSystem device : homeSystems){
+            if(device.getDevice().equalsIgnoreCase(deviceName)){
+                if(turnOn){
+                    device.turnOn();
+                }else{
+                    device.turnOff();
+                }
+                deviceFound = true;
+                break;
+            }
+        }
+        return deviceFound;
     }
 
-    public static void controlDevice(String deviceName, boolean turnOn){
-        for(homeSystem homeSystem : homeSystems){
-            if(homeSystem.getDevice().equalsIgnoreCase(deviceName)){
-                if(turnOn){
-                    homeSystem.turnOn();
-                }else{
-                    homeSystem.turnOff();
-                }
+    public static List<homeSystem> getAllDevices() {
+        return new ArrayList<>(homeSystems);
+    }
+
+    public thermostat getThermostat() {
+        return thermostat;
+    }
+
+    public void sortDevicesByLocation(){
+        homeSystems.sort(new deviceLocationSorter());
+    }
+
+    public void displayDevices(){
+        if(homeSystems.isEmpty()){
+            System.out.println("No available devices.");
+            return;
+        }else{
+            for(homeSystem device : homeSystems){
+                device.displayInfo();
+                System.out.println(", ");
             }
         }
     }
