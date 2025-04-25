@@ -1,4 +1,4 @@
-thermostat, Hallway
+thermostat, Hallway, 67
 security system, hallway
 fan, living room
 fan, bedroom
