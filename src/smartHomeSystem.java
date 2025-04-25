@@ -219,4 +219,7 @@ public class smartHomeSystem<T extends homeSystem>{
             return (milliseconds / 86400000) + " days";
         }
     }
+
+    public void addThermostat(T t) {
+    }
 }
